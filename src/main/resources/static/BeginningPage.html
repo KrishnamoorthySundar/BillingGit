@@ -5,8 +5,10 @@
 		<meta charset="utf-8">
 		<title>Invoice</title>
 		<link rel="stylesheet" href="style.css">
-		<link rel="license" href="https://www.opensource.org/licenses/mit-license/">
+		<link rel="license" href="https://www.opensource.org/licenses/mit-license/">		
+		<script src="jquery.min.js"></script>
 		<script src="script.js"></script>
+		<script src="selectorController.js"></script>
 	</head>
 	<body>
 		<p style="font-size: 70%;" contenteditable>GSTIN : 33AKWPR8830K1ZB</p>
@@ -62,7 +64,7 @@
 				</thead>
 				<tbody>
 					<tr>
-						<td><a class="cut">-</a><span contenteditable></span></td>
+						<td><a class="cut">-</a><select class="sel"><option>Select a Product </option></select></td>
 						<td><span contenteditable></span></td>
 						<td><span>₹</span><span contenteditable></span></td>
 						<td><span contenteditable></span></td>
@@ -71,21 +73,46 @@
 				</tbody>
 			</table>
 			<a class="add">+</a>
+			<h3> Company's BANK details</h3>
+			<table class="bank">
+			<tr>
+				<th><span contenteditable>Bank Name</span></th>
+				<td><span contenteditable>Indian Bank</span></td>
+			</tr>
+			<tr>
+				<th><span contenteditable>Account No</span></th>
+				<td><span contenteditable>776861626</span></td>
+			</tr>
+			<tr>
+				<th><span contenteditable>Branch</span></th>
+				<td><span contenteditable>Chitlapakkam</span></td>
+			</tr>
+			<tr>
+				<th><span contenteditable>IFSC Code</span></th>
+				<td><span contenteditable>IDIB000C115</span></td>
+			</tr>
+			<tr></tr>
+			</table>
 			<table class="balance">
 				<tr>
 					<th><span contenteditable>Total Price</span></th>
 					<td><span data-prefix>₹</span><span></span></td>
 				</tr>
 				<tr>
-					<th><span contenteditable>SGST+CGST</span></th>
+					<th><span contenteditable>SGST-2.5%</span></th>
 					<td><span data-prefix>₹</span><span contenteditable></span></td>
 				</tr>
 				<tr>
-					<th><span contenteditable>Bill Amount</span></th>
+					<th><span contenteditable>CGST-2.5%</span></th>
+					<td><span data-prefix>₹</span><span contenteditable></span></td>
+				</tr>
+				<tr>
+					<th><span contenteditable><p>Bill Amount</span></th>
 					<td><span data-prefix>₹</span><span></span></td>
 				</tr>
 			</table>
 		</article>
 	</body>
+		<h2>For G.R. Textiles</h2>
 		<button onclick="javascript:window.print();">Thank You</button>
 </html>

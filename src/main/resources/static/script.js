@@ -19,7 +19,7 @@
 		'[hidden],audio{display:none}' +
 		'mark{background:#FF0;color:#000}' +
 	'</style>';
-
+	
 	return head.insertBefore(element.lastChild, head.firstChild);
 })(document);
 
@@ -65,15 +65,30 @@
 /* Helper Functions
 /* ========================================================================== */
 
+//Populating products in drop down of new row
+function populate(genereatedClassName){
+	var generatedAppendText = '.'+genereatedClassName;
+	$.ajax({
+        url: "http://localhost:8080/products"
+    }).then(function(data) {
+       	for(var i=0;i<=data.length;i++){
+       		$(generatedAppendText).append("<option>"+data[i].productName+"</option>");
+    	}
+    });
+}
+//counterForClassname is to give the class of the select to be different all the time so that it can be easily populated without populating the previous row
+var counterForClassname=1;
 function generateTableRow() {
 	var emptyColumn = document.createElement('tr');
-
-	emptyColumn.innerHTML = '<td><a class="cut">-</a><span contenteditable></span></td>' +
-		'<td><span contenteditable></span></td>' +
-		'<td><span>₹</span><span contenteditable></span></td>' +
-		'<td><span contenteditable></span></td>' +
-		'<td><span data-prefix>₹</span><span></span></td>';
-
+	var genereatedClassName='sel'+counterForClassname;
+	var paramForemptyColumnDOTinnerHTML='<td><a class="cut">-</a><select class="'+genereatedClassName+'"><option>Select a Product </option></select></td>' +
+										'<td><span contenteditable></span></td>' +
+										'<td><span>₹</span><span contenteditable></span></td>' +
+										'<td><span contenteditable></span></td>' +
+										'<td><span data-prefix>₹</span><span></span></td>';
+	emptyColumn.innerHTML = paramForemptyColumnDOTinnerHTML;
+	populate(genereatedClassName);
+	counterForClassname++;
 	return emptyColumn;
 }
 
@@ -121,13 +136,13 @@ function updateInvoice() {
 		cells = a[i].querySelectorAll('span:last-child');
 
 		// set price as cell[2] * cell[3]
-		price = parseFloatHTML(cells[2]) * parseFloatHTML(cells[3]);
+		price = parseFloatHTML(cells[1]) * parseFloatHTML(cells[2]);
 
 		// add price to total
 		total += price;
 
 		// set row total
-		cells[4].innerHTML = price;
+		cells[3].innerHTML = price;
 	}
 
 	// update balance cells
@@ -139,11 +154,14 @@ function updateInvoice() {
 	// set total
 	cells[0].innerHTML = total;
 	
-	//set GST
-	cells[1].innerHTML = total*0.05;
+	//set SGST as 2.5% of total
+	cells[1].innerHTML = total*0.025;
+	
+	//set CGST as 2.5% of total
+	cells[2].innerHTML = total*0.025;
 	
 	//set Bill Amount
-	cells[2].innerHTML = Math.round(total + total*0.05);
+	cells[3].innerHTML = Math.round(total + total*0.05);
 	
 	// set balance and meta balance
 	//cells[2].innerHTML = document.querySelector('table.meta tr:last-child td:last-child span:last-child').innerHTML = parsePrice(total - parseFloatHTML(cells[1]));
@@ -183,7 +201,7 @@ function onContentLoad() {
 
 			row.parentNode.removeChild(row);
 		}
-
+		
 		updateInvoice();
 	}
 
