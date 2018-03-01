@@ -70,9 +70,9 @@ function generateTableRow() {
 
 	emptyColumn.innerHTML = '<td><a class="cut">-</a><span contenteditable></span></td>' +
 		'<td><span contenteditable></span></td>' +
-		'<td><span data-prefix>$</span><span contenteditable>0.00</span></td>' +
-		'<td><span contenteditable>0</span></td>' +
-		'<td><span data-prefix>$</span><span>0.00</span></td>';
+		'<td><span>₹</span><span contenteditable></span></td>' +
+		'<td><span contenteditable></span></td>' +
+		'<td><span data-prefix>₹</span><span></span></td>';
 
 	return emptyColumn;
 }
@@ -138,15 +138,21 @@ function updateInvoice() {
 
 	// set total
 	cells[0].innerHTML = total;
-
+	
+	//set GST
+	cells[1].innerHTML = total*0.05;
+	
+	//set Bill Amount
+	cells[2].innerHTML = Math.round(total + total*0.05);
+	
 	// set balance and meta balance
-	cells[2].innerHTML = document.querySelector('table.meta tr:last-child td:last-child span:last-child').innerHTML = parsePrice(total - parseFloatHTML(cells[1]));
+	//cells[2].innerHTML = document.querySelector('table.meta tr:last-child td:last-child span:last-child').innerHTML = parsePrice(total - parseFloatHTML(cells[1]));
 
 	// update prefix formatting
 	// ========================
 
-	var prefix = document.querySelector('#prefix').innerHTML;
-	for (a = document.querySelectorAll('[data-prefix]'), i = 0; a[i]; ++i) a[i].innerHTML = prefix;
+	//var prefix = document.querySelector('#prefix').innerHTML;
+	//for (a = document.querySelectorAll('[data-prefix]'), i = 0; a[i]; ++i) a[i].innerHTML = prefix;
 
 	// update price formatting
 	// =======================

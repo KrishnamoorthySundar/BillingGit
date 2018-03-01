@@ -87,7 +87,7 @@ public class adminRest {
 		boolean status = userService.validate(user);
 		if (status) {
 			retStatus = "<p align=\"center\">" + "Authentication Success "
-					+ "<br><a href=\"billingPage.html\">launch</a></p>";
+					+ "<br><a href=\"BeginningPage.html\">launch</a></p>";
 		}
 		
 		return retStatus;
