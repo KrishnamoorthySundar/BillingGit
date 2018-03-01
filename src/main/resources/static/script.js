@@ -82,7 +82,7 @@ function generateTableRow() {
 	var emptyColumn = document.createElement('tr');
 	var genereatedClassName='sel'+counterForClassname;
 	var paramForemptyColumnDOTinnerHTML='<td><a class="cut">-</a><select class="'+genereatedClassName+'"><option>Select a Product </option></select></td>' +
-										'<td><span contenteditable></span></td>' +
+										'<td><span contenteditable>-</span></td>' +
 										'<td><span>₹</span><span contenteditable></span></td>' +
 										'<td><span contenteditable></span></td>' +
 										'<td><span data-prefix>₹</span><span></span></td>';
