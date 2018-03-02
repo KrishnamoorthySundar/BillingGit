@@ -7,10 +7,18 @@
 		<link rel="stylesheet" href="style.css">
 		<link rel="license" href="https://www.opensource.org/licenses/mit-license/">		
 		<script src="jquery.min.js"></script>
+		<script src="moment.min.js"></script>
 		<script src="script.js"></script>
 		<script src="selectorController.js"></script>
+		<script>
+			//This script loads the date in class meta table
+			function dateLoader(){
+				var today = moment().format('YYYY-MM-DD');
+				document.getElementById("theDate").value = today;
+			}
+		</script>
 	</head>
-	<body>
+	<body onload="dateLoader()">
 		<p style="font-size: 70%;" contenteditable>GSTIN : 33AKWPR8830K1ZB</p>
 		<header>			
 			<h1>G.R.Textiles</h1>
@@ -37,7 +45,8 @@
 				</tr>
 				<tr>
 					<th><span contenteditable>Date</span></th>
-					<td><span contenteditable><input id="date" type="date" value="2018-01-01"></span></td>
+					<!-- Today's date gets automatically populated because of the dateLoader funcation that gets triggered on HTML body loading -->
+					<td><span contenteditable><input id="theDate" type="date"></span></td>
 				</tr>
 				<tr>
 					<th><span contenteditable>Roadways</span></th>
