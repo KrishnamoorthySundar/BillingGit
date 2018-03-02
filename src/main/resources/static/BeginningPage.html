@@ -2,6 +2,7 @@
 
 <html>
 	<head>
+	
 		<meta charset="utf-8">
 		<title>Invoice</title>
 		<link rel="stylesheet" href="style.css">
@@ -10,13 +11,7 @@
 		<script src="moment.min.js"></script>
 		<script src="script.js"></script>
 		<script src="selectorController.js"></script>
-		<script>
-			//This script loads the date in class meta table
-			function dateLoader(){
-				var today = moment().format('YYYY-MM-DD');
-				document.getElementById("theDate").value = today;
-			}
-		</script>
+		
 	</head>
 	<body onload="dateLoader()">
 		<p style="font-size: 70%;" contenteditable>GSTIN : 33AKWPR8830K1ZB</p>
@@ -75,8 +70,8 @@
 					<tr>
 						<td><a class="cut">-</a><select class="sel"><option>Select a Product </option></select></td>
 						<td><span contenteditable>-</span></td>
-						<td><span>₹</span><span contenteditable></span></td>
-						<td><span contenteditable></span></td>
+						<td><span>₹</span><span contenteditable onkeypress='validate(event)'></span></td>
+						<td><span contenteditable onkeypress='validate(event)'></span></td>
 						<td><span data-prefix>₹</span><span></span></td>
 					</tr>
 				</tbody>

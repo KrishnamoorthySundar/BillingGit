@@ -65,6 +65,25 @@
 /* Helper Functions
 /* ========================================================================== */
 
+
+//This script loads the date in class meta table
+	function dateLoader(){
+		var today = moment().format('YYYY-MM-DD');
+		document.getElementById("theDate").value = today;
+	}
+
+//This script disables keystrokes other than numbers, backspace, arrows and delete
+function validate(evt) {
+	  var theEvent = evt || window.event;
+	  var key = theEvent.keyCode || theEvent.which;
+	  key = String.fromCharCode( key );
+	  var regex = /[0-9]|\./;
+	  if( !regex.test(key) ) {
+	    theEvent.returnValue = false;
+	    if(theEvent.preventDefault) theEvent.preventDefault();
+	  }
+	}
+
 //Populating products in drop down of new row
 function populate(genereatedClassName){
 	var generatedAppendText = '.'+genereatedClassName;
@@ -83,8 +102,8 @@ function generateTableRow() {
 	var genereatedClassName='sel'+counterForClassname;
 	var paramForemptyColumnDOTinnerHTML='<td><a class="cut">-</a><select class="'+genereatedClassName+'"><option>Select a Product </option></select></td>' +
 										'<td><span contenteditable>-</span></td>' +
-										'<td><span>₹</span><span contenteditable></span></td>' +
-										'<td><span contenteditable></span></td>' +
+										'<td><span>₹</span><span contenteditable onkeypress=\'validate(event)\'></span></td>' +
+										'<td><span contenteditable onkeypress=\'validate(event)\'></span></td>' +
 										'<td><span data-prefix>₹</span><span></span></td>';
 	emptyColumn.innerHTML = paramForemptyColumnDOTinnerHTML;
 	populate(genereatedClassName);
