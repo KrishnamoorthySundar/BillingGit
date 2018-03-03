@@ -93,7 +93,8 @@ function inwordsTrigger(){
 
 //This script is for filling For G.R Textiles at the end
 function fillfor(){
-	document.getElementById("forPart").innerHTML='For G.R Textiles';
+	var companyName= 'For '+document.getElementById("companyName").innerHTML;
+	document.getElementById("forPart").innerHTML=companyName;
 }
 
 //This script loads the date in class meta table
