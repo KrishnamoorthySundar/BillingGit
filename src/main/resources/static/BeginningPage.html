@@ -111,12 +111,17 @@
 					<td><span data-prefix>₹</span><span contenteditable></span></td>
 				</tr>
 				<tr>
-					<th><span contenteditable><p>Bill Amount</span></th>
-					<td><span data-prefix>₹</span><span></span></td>
+					<th><span contenteditable>Bill Amount</span></th>
+					<td><span data-prefix>₹</span><span id="billAmount"></span></td>
+				</tr>
+			</table>
+			<table class="wordsTable">
+				<tr>
+					<td><span contenteditable id="idWordsTable"></span></td>
 				</tr>
 			</table>
 		</article>
 	</body>
-		<h2>For G.R Textiles</h2>
-		<button onclick="javascript:window.print();">Thank You</button>
+		<h2 id="forPart"></h2>
+		<button onclick="fillfor();javascript:window.print();">Thank You</button>
 </html>

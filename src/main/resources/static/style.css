@@ -125,6 +125,11 @@ table.balance td { text-align: right; }
 table.balance th { font-weight: bold; }
 table.balance td { font-weight: bold; }
 
+/* table wordsTable */
+table.wordsTable td { text-align: right; }
+table.wordsTable th { font-weight: bold; }
+table.wordsTable td { font-weight: bold; }
+
 /* aside */
 
 aside h1 { border: none; border-width: 0 0 1px; margin: 0 0 1em; }

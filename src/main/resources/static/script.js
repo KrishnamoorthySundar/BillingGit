@@ -62,9 +62,39 @@
 	};
 })(this, Element.prototype, Array.prototype);
 
+/* ========================================================================== */
+/* ========================================================================== */
 /* Helper Functions
 /* ========================================================================== */
+/* ========================================================================== */
 
+//This script is for converting bill amount to word format
+var a = ['','One ','Two ','Three ','Four ', 'Five ','Six ','Seven ','Eight ','Nine ','Ten ','Eleven ','Twelve ','Thirteen ','Fourteen ','Fifteen ','Sixteen ','Seventeen ','Eighteen ','Nineteen '];
+var b = ['', '', 'Twenty','Thirty','Forty','Fifty', 'Sixty','Seventy','Eighty','Ninety'];
+
+function inWords(num) {
+    if ((num = num.toString()).length > 9) return 'overflow';
+    n = ('000000000' + num).substr(-9).match(/^(\d{2})(\d{2})(\d{2})(\d{1})(\d{2})$/);
+    if (!n) return; var str = 'In Words (Rupees):';
+    str += (n[1] != 0) ? (a[Number(n[1])] || b[n[1][0]] + ' ' + a[n[1][1]]) + 'Crore ' : '';
+    str += (n[2] != 0) ? (a[Number(n[2])] || b[n[2][0]] + ' ' + a[n[2][1]]) + 'Lakh ' : '';
+    str += (n[3] != 0) ? (a[Number(n[3])] || b[n[3][0]] + ' ' + a[n[3][1]]) + 'Thousand ' : '';
+    str += (n[4] != 0) ? (a[Number(n[4])] || b[n[4][0]] + ' ' + a[n[4][1]]) + 'Hundred ' : '';
+    str += (n[5] != 0) ? ((str != '') ? 'and ' : '') + (a[Number(n[5])] || b[n[5][0]] + ' ' + a[n[5][1]]) + 'Only ' : '';
+    return str;
+}
+
+//This script is for calling the inwords function
+function inwordsTrigger(){
+	var billAmount = document.getElementById("billAmount").innerHTML;
+	var words=inWords(billAmount);
+	document.getElementById("idWordsTable").innerHTML=words;
+}
+
+//This script is for filling For G.R Textiles at the end
+function fillfor(){
+	document.getElementById("forPart").innerHTML='For G.R Textiles';
+}
 
 //This script loads the date in class meta table
 	function dateLoader(){
@@ -182,6 +212,8 @@ function updateInvoice() {
 	//set Bill Amount
 	cells[3].innerHTML = Math.round(total + total*0.05);
 	
+	//call trigger
+	inwordsTrigger();
 	// set balance and meta balance
 	//cells[2].innerHTML = document.querySelector('table.meta tr:last-child td:last-child span:last-child').innerHTML = parsePrice(total - parseFloatHTML(cells[1]));
 
