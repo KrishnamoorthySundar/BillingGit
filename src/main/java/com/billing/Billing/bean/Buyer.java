@@ -8,11 +8,26 @@ public class Buyer {
 	@Id
 	private int buyerId;
 	private String buyerName;
-
+	private String buyerGst;
 	public Buyer(int buyerId, String buyerName) {
 		super();
 		this.buyerId = buyerId;
 		this.buyerName = buyerName;
+	}
+
+	public Buyer(int buyerId, String buyerName, String buyerGst) {
+		super();
+		this.buyerId = buyerId;
+		this.buyerName = buyerName;
+		this.buyerGst = buyerGst;
+	}
+
+	public String getBuyerGst() {
+		return buyerGst;
+	}
+
+	public void setBuyerGst(String buyerGst) {
+		this.buyerGst = buyerGst;
 	}
 
 	public Buyer(int buyerId) {

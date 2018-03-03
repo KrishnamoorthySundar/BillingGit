@@ -19,7 +19,7 @@
 		'[hidden],audio{display:none}' +
 		'mark{background:#FF0;color:#000}' +
 	'</style>';
-
+	
 	return head.insertBefore(element.lastChild, head.firstChild);
 })(document);
 
@@ -62,18 +62,83 @@
 	};
 })(this, Element.prototype, Array.prototype);
 
+/* ========================================================================== */
+/* ========================================================================== */
 /* Helper Functions
 /* ========================================================================== */
+/* ========================================================================== */
 
+//This script is for converting bill amount to word format
+var a = ['','One ','Two ','Three ','Four ', 'Five ','Six ','Seven ','Eight ','Nine ','Ten ','Eleven ','Twelve ','Thirteen ','Fourteen ','Fifteen ','Sixteen ','Seventeen ','Eighteen ','Nineteen '];
+var b = ['', '', 'Twenty','Thirty','Forty','Fifty', 'Sixty','Seventy','Eighty','Ninety'];
+
+function inWords(num) {
+    if ((num = num.toString()).length > 9) return 'overflow';
+    n = ('000000000' + num).substr(-9).match(/^(\d{2})(\d{2})(\d{2})(\d{1})(\d{2})$/);
+    if (!n) return; var str = 'In Words (Rupees):';
+    str += (n[1] != 0) ? (a[Number(n[1])] || b[n[1][0]] + ' ' + a[n[1][1]]) + 'Crore ' : '';
+    str += (n[2] != 0) ? (a[Number(n[2])] || b[n[2][0]] + ' ' + a[n[2][1]]) + 'Lakh ' : '';
+    str += (n[3] != 0) ? (a[Number(n[3])] || b[n[3][0]] + ' ' + a[n[3][1]]) + 'Thousand ' : '';
+    str += (n[4] != 0) ? (a[Number(n[4])] || b[n[4][0]] + ' ' + a[n[4][1]]) + 'Hundred ' : '';
+    str += (n[5] != 0) ? ((str != '') ? 'and ' : '') + (a[Number(n[5])] || b[n[5][0]] + ' ' + a[n[5][1]]) + 'Only ' : '';
+    return str;
+}
+
+//This script is for calling the inwords function
+function inwordsTrigger(){
+	var billAmount = document.getElementById("billAmount").innerHTML;
+	var words=inWords(billAmount);
+	document.getElementById("idWordsTable").innerHTML=words;
+}
+
+//This script is for filling For G.R Textiles at the end
+function fillfor(){
+	var companyName= 'For '+document.getElementById("companyName").innerHTML;
+	document.getElementById("forPart").innerHTML=companyName;
+}
+
+//This script loads the date in class meta table
+	function dateLoader(){
+		var today = moment().format('YYYY-MM-DD');
+		document.getElementById("theDate").value = today;
+	}
+
+//This script disables keystrokes other than numbers, backspace, arrows and delete
+function validate(evt) {
+	  var theEvent = evt || window.event;
+	  var key = theEvent.keyCode || theEvent.which;
+	  key = String.fromCharCode( key );
+	  var regex = /[0-9]|\./;
+	  if( !regex.test(key) ) {
+	    theEvent.returnValue = false;
+	    if(theEvent.preventDefault) theEvent.preventDefault();
+	  }
+	}
+
+//Populating products in drop down of new row
+function populate(genereatedClassName){
+	var generatedAppendText = '.'+genereatedClassName;
+	$.ajax({
+        url: "http://localhost:8080/products"
+    }).then(function(data) {
+       	for(var i=0;i<=data.length;i++){
+       		$(generatedAppendText).append("<option>"+data[i].productName+"</option>");
+    	}
+    });
+}
+//counterForClassname is to give the class of the select to be different all the time so that it can be easily populated without populating the previous row
+var counterForClassname=1;
 function generateTableRow() {
 	var emptyColumn = document.createElement('tr');
-
-	emptyColumn.innerHTML = '<td><a class="cut">-</a><span contenteditable></span></td>' +
-		'<td><span contenteditable></span></td>' +
-		'<td><span data-prefix>$</span><span contenteditable>0.00</span></td>' +
-		'<td><span contenteditable>0</span></td>' +
-		'<td><span data-prefix>$</span><span>0.00</span></td>';
-
+	var genereatedClassName='sel'+counterForClassname;
+	var paramForemptyColumnDOTinnerHTML='<td><a class="cut">-</a><select class="'+genereatedClassName+'"><option>Select a Product </option></select></td>' +
+										'<td><span contenteditable>-</span></td>' +
+										'<td><span>₹</span><span contenteditable onkeypress=\'validate(event)\'></span></td>' +
+										'<td><span contenteditable onkeypress=\'validate(event)\'></span></td>' +
+										'<td><span data-prefix>₹</span><span></span></td>';
+	emptyColumn.innerHTML = paramForemptyColumnDOTinnerHTML;
+	populate(genereatedClassName);
+	counterForClassname++;
 	return emptyColumn;
 }
 
@@ -121,13 +186,13 @@ function updateInvoice() {
 		cells = a[i].querySelectorAll('span:last-child');
 
 		// set price as cell[2] * cell[3]
-		price = parseFloatHTML(cells[2]) * parseFloatHTML(cells[3]);
+		price = parseFloatHTML(cells[1]) * parseFloatHTML(cells[2]);
 
 		// add price to total
 		total += price;
 
 		// set row total
-		cells[4].innerHTML = price;
+		cells[3].innerHTML = price;
 	}
 
 	// update balance cells
@@ -138,15 +203,26 @@ function updateInvoice() {
 
 	// set total
 	cells[0].innerHTML = total;
-
+	
+	//set SGST as 2.5% of total
+	cells[1].innerHTML = total*0.025;
+	
+	//set CGST as 2.5% of total
+	cells[2].innerHTML = total*0.025;
+	
+	//set Bill Amount
+	cells[3].innerHTML = Math.round(total + total*0.05);
+	
+	//call trigger
+	inwordsTrigger();
 	// set balance and meta balance
-	cells[2].innerHTML = document.querySelector('table.meta tr:last-child td:last-child span:last-child').innerHTML = parsePrice(total - parseFloatHTML(cells[1]));
+	//cells[2].innerHTML = document.querySelector('table.meta tr:last-child td:last-child span:last-child').innerHTML = parsePrice(total - parseFloatHTML(cells[1]));
 
 	// update prefix formatting
 	// ========================
 
-	var prefix = document.querySelector('#prefix').innerHTML;
-	for (a = document.querySelectorAll('[data-prefix]'), i = 0; a[i]; ++i) a[i].innerHTML = prefix;
+	//var prefix = document.querySelector('#prefix').innerHTML;
+	//for (a = document.querySelectorAll('[data-prefix]'), i = 0; a[i]; ++i) a[i].innerHTML = prefix;
 
 	// update price formatting
 	// =======================
@@ -177,7 +253,7 @@ function onContentLoad() {
 
 			row.parentNode.removeChild(row);
 		}
-
+		
 		updateInvoice();
 	}
 
