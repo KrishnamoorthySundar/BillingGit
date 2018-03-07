@@ -4,19 +4,41 @@
 <meta charset="ISO-8859-1">
 <title>Billing application</title>
 <script src="userAuthenticationController.js"></script>
+<script>
+function searchKeyPress(e)
+{
+    // look for window.event in case event isn't passed in
+    e = e || window.event;
+    if (e.keyCode == 13)
+    {
+        document.getElementById('btnSearch').click();
+        return false;
+    }
+    return true;
+}
+
+function userAuthenticate(){
+	var userName= document.getElementById('userName').value.toUpperCase();
+	var userPassword= document.getElementById('userPassword').value.toUpperCase();
+	if(userName=='ADMIN' && userPassword=='ADMIN'){
+		window.location = "LoginSuccessfulPage.html";
+	}else{
+		alert('Authentication failed');
+	}
+}
+</script>
 </head>
 <body>
-<p align="right">
-<a href="adminSuccessLogin.html">Admin part</a>
-</p>
 <br><br><br><br>
 <p align="center">
 <h2 align="center">Billing</h2>
-<form action="/userAuthenticate" method="post">
+<form>
+<table align="center">
+<tr><td>Enter User Name : </td><td><input type="text" id="userName" onkeypress="return searchKeyPress(event);"></input></td></tr>
+<tr><td>Enter Password :  </td><td><input type="password" id="userPassword" onkeypress="return searchKeyPress(event);"></input></td></tr>
+</table>
 <p align="center">
-Enter User Name : <input type="text" name="userName"></input><br>
-Enter Password :  <input type="password" name="userPassword"></input><br><br>
-<input type="submit" value="Login"></input>
+<input type="button" id="btnSearch" value="Login" onclick="userAuthenticate()"></input>
 </p>
 </form>
 </body>

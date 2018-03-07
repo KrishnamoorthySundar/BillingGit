@@ -13,10 +13,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.billing.Billing.bean.Buyer;
 import com.billing.Billing.bean.Product;
-import com.billing.Billing.bean.User;
 import com.billing.Billing.services.BuyerService;
 import com.billing.Billing.services.ProductService;
-import com.billing.Billing.services.UserService;
 
 @RestController
 public class adminRest {
@@ -24,8 +22,7 @@ public class adminRest {
 	public ProductService productService;
 	@Autowired
 	public BuyerService buyerService;
-	@Autowired
-	public UserService userService;
+	
 
 	// REST service for getting all the products from DB
 	@RequestMapping(method = RequestMethod.GET, value = "/products")
@@ -41,7 +38,7 @@ public class adminRest {
 	public String addProduct(@ModelAttribute Product product) {
 		System.out.println("adding Product method " + product.toString());
 		productService.addProduct(product);
-		return "Successfully added<br><a href=\"http://localhost:8080/\">home</a>";
+		return "Successfully added<br><a href=\"http://localhost:8080/addProductPage.html\">Add more</a><br><a href=\"http://localhost:8080/LoginSuccessfulPage.html\">home</a>";
 	}
 
 	// REST service for deleting a product
@@ -50,7 +47,7 @@ public class adminRest {
 		System.out.println("deleting Product method " + product.toString());
 		productService.deleteProduct(product);
 		return "Deleted Product (Id = " + product.getProductId()
-				+ ")successfully<br><a href=\"http://localhost:8080/\">home</a>";
+				+ ")successfully<br><a href=\"http://localhost:8080/deleteProductPage.html\">Delete more</a><br><a href=\"http://localhost:8080/LoginSuccessfulPage.html\">Home</a>";
 	}
 
 	// REST service for getting all the buyers from DB
@@ -66,7 +63,7 @@ public class adminRest {
 	public String addBuyers(@ModelAttribute Buyer buyer) {
 		System.out.println("adding buyer method " + buyer.toString());
 		buyerService.addBuyer(buyer);
-		return "Successfully added<br><a href=\"http://localhost:8080/\">home</a>";
+		return "Successfully added<br><a href=\"http://localhost:8080/addBuyerPage.html\">Add more</a><br><a href=\"http://localhost:8080/LoginSuccessfulPage.html\">home</a>";
 	}
 
 	// REST service for deleting a buyer
@@ -75,21 +72,7 @@ public class adminRest {
 		System.out.println("deleting a buyer method " + buyer.toString());
 		buyerService.deleteBuyer(buyer);
 		return "Deleted Product (Id = " + buyer.getBuyerId()
-				+ " + )successfully<br><a href=\"http://localhost:8080/\">home</a>";
+				+ " + )successfully<br><a href=\"http://localhost:8080/deleteBuyerPage.html\">Delete more</a><br><a href=\"http://localhost:8080/LoginSuccessfulPage.html\">home</a>";
 	}
-
-	// REST service for validating a Billing user
-	@PostMapping("/userAuthenticate")
-	public String authenticateUser(@ModelAttribute User user) {
-
-		System.out.println("userAuthenticate called with user " + user.toString());
-		String retStatus = "<p align=\"center\">" + "failure" + "<br><a href=\"index.html\">Home</a></p>";
-		boolean status = userService.validate(user);
-		if (status) {
-			retStatus = "<p align=\"center\">" + "Authentication Success "
-					+ "<br><a href=\"BeginningPage.html\">launch</a></p>";
-		}
-		
-		return retStatus;
-	}
+	
 }
