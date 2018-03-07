@@ -7,11 +7,16 @@
 <body>
 <p align="center">Add/Update Products page</p>
 <p>Current Buyers List</p>
-<iframe src="getBuyerPage.html" height="400px"></iframe><br>
+<iframe src="getBuyerPage.html" height="400px" width="1200px"></iframe><br>
 <form  action="/buyers" method="POST" name="addBuyerForm" >
-Enter the Buyer id you want to add : <input type="text" name="buyerId"></input><br>
-Enter the Buyer name you want to add : <input type="text" name="buyerName"></input><br>
+Enter the Buyer id you want to add : <input type="text" name="buyerId" required="required"></input><br>
+Enter the Buyer name you want to add : <input type="text" name="buyerName" required="required"></input><br>
 Enter the Buyer GST you want to add : <input type="text" name="buyerGst"></input><br>
+Enter the Buyer number & Street you want to add : <input type="text" name="buyerStreet" required="required"></input><br>
+Enter the Buyer District and PIN you want to add : <input type="text" name="buyerDistrict" required="required"></input><br>
+Enter the Buyer State you want to add : <input type="text" name="buyerState" value="Tamilnadu"></input><br>
+Enter the Buyer Code you want to add : <input type="text" name="buyerCode" value=33></input><br>
+Enter the Buyer Mobile number you want to add : <input type="text" name="buyerMobile"></input><br>
 <input type="submit" value="Add Buyer"></input>
 </form>
 </body>
