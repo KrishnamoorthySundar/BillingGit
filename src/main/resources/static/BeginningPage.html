@@ -11,37 +11,40 @@
 		<script src="moment.min.js"></script>
 		<script src="script.js"></script>
 		<script src="selectorController.js"></script>
-		
+		<script src="buyerSelectorController.js"></script>
+	
 	</head>
 	<body onload="dateLoader()">
-		<p style="font-size: 90%;" contenteditable>GSTIN : 33AKWPR8830K1ZB</p>
+		<p style="font-size: 90%;">GSTIN: 33AKWPR8830K1ZB&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;PHONE: 8056101822<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 9941565480<br>&nbsp;</p>
 		<header>			
-			<h1 id="companyName" contenteditable>G.R.Textiles</h1>
-			<address contenteditable>
-				<p>No.1, Ragavan Street, 2nd floor</p>
-				<p>Shiva Shankar Nagar, Nagalkeni</p>
-				<p>Chrompet, Chennai-600 044</p>
-			</address>
-			<table class="contactDetails">
+			<h1 id="companyName"><p style="letter-spacing: 0.3em, ">G.R. Textiles<br><p style="font-size: 10px">No.1, Ragavan Street, 2nd floor, Shiva Shankar Nagar, Nagalkeni, Chrompet, Chennai-600 044<p style="text-transform: lowercase; font-size: 10px">email: grtextiles.chennai@gmail.com</p></h1>
+		</header>
+			<table class="buyer">
 				<tr>
-					<th>Mobile :</td>
-					<td>8056101822, 9941565480</td>
+					<td><span contenteditable style="font-weight: bold;font-size: 16px">TO:</span></td>
 				</tr>
 				<tr>
-					<th>E-mail:</td>
-					<td><a href="mailto:grtextiles.chennai@gmail.com">grtextiles.chennai@gmail.com</a></td>
+					<td><span><select class="buyerSel"><option>Select a Buyer</option></select></span></td>
+				</tr>
+				<tr>
+					<td><span contenteditable>---</span></td>
+				</tr>
+				<tr>
+					<td><span contenteditable>---</span></td>
+				</tr>
+				<tr>
+					<td><span contenteditable>5208 (common for all goods)</span></td>
 				</tr>
 			</table>
-		</header>
 			<table class="meta">
 				<tr>
-					<th><span contenteditable>Invoice #</span></th>
+					<th><span>Invoice #</span></th>
 					<td><span contenteditable></span></td>
 				</tr>
 				<tr>
-					<th><span contenteditable>Date</span></th>
+					<th><span>Date</span></th>
 					<!-- Today's date gets automatically populated because of the dateLoader funcation that gets triggered on HTML body loading -->
-					<td><span contenteditable><input id="theDate" type="date"></span></td>
+					<td><span><input id="theDate" type="date"></span></td>
 				</tr>
 				<tr>
 					<th><span contenteditable>Roadways</span></th>
@@ -59,19 +62,19 @@
 			<table class="inventory">
 				<thead>
 					<tr>
-						<th><span contenteditable>Item</span></th>
-						<th><span contenteditable>Description</span></th>
-						<th><span contenteditable>Rate</span></th>
-						<th><span contenteditable>Quantity</span></th>
-						<th><span contenteditable>Price</span></th>
+						<th><span>Item</span></th>
+						<th><span>Description</span></th>
+						<th><span>Quantity</span></th>
+						<th><span>Rate</span></th>
+						<th><span>Price</span></th>
 					</tr>
 				</thead>
 				<tbody>
 					<tr>
 						<td><a class="cut">-</a><select class="sel"><option>Select a Product </option></select></td>
 						<td><span contenteditable>-</span></td>
-						<td><span>₹</span><span contenteditable onkeypress='validate(event)'></span></td>
 						<td><span contenteditable onkeypress='validate(event)'></span></td>
+						<td><span>₹</span><span contenteditable onkeypress='validate(event)'></span></td>
 						<td><span data-prefix>₹</span><span></span></td>
 					</tr>
 				</tbody>
@@ -99,29 +102,29 @@
 			</table>
 			<table class="balance">
 				<tr>
-					<th><span contenteditable>Total Price</span></th>
+					<th><span>Total Price</span></th>
 					<td><span data-prefix>₹</span><span></span></td>
 				</tr>
 				<tr>
-					<th><span contenteditable>SGST-2.5%</span></th>
+					<th><span>SGST-2.5%</span></th>
 					<td><span data-prefix>₹</span><span contenteditable></span></td>
 				</tr>
 				<tr>
-					<th><span contenteditable>CGST-2.5%</span></th>
+					<th><span>CGST-2.5%</span></th>
 					<td><span data-prefix>₹</span><span contenteditable></span></td>
 				</tr>
 				<tr>
-					<th><span contenteditable>Bill Amount</span></th>
+					<th><span>Bill Amount</span></th>
 					<td><span data-prefix>₹</span><span id="billAmount"></span></td>
 				</tr>
 			</table>
 			<table class="wordsTable">
 				<tr>
-					<td><span contenteditable id="idWordsTable"></span></td>
+					<td><span id="idWordsTable"></span></td>
 				</tr>
 			</table>
 		</article>
 	</body>
 		<h2 id="forPart"></h2>
-		<button onclick="fillfor();javascript:window.print();">Thank You</button>
+		<button onclick="fillFor();javascript:window.print();">Thank You</button>
 </html>

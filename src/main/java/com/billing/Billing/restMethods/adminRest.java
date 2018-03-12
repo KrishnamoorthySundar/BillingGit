@@ -1,13 +1,17 @@
 package com.billing.Billing.restMethods;
 
+import java.util.Iterator;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.annotation.QueryAnnotation;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -73,6 +77,19 @@ public class adminRest {
 		buyerService.deleteBuyer(buyer);
 		return "Deleted Product (Id = " + buyer.getBuyerId()
 				+ " + )successfully<br><a href=\"http://localhost:8080/deleteBuyerPage.html\">Delete more</a><br><a href=\"http://localhost:8080/LoginSuccessfulPage.html\">home</a>";
+	}
+	
+	//REST service for getting a particular buyer based on buyerName
+	@GetMapping("/getOneBuyer")
+	public Buyer getOneBuyer(@RequestParam String buyerName) {
+		System.out.println("GETTING ONE buyer "+buyerName);
+		List<Buyer> buyerList = buyerService.getBuyers();
+		for(int i=0;i<buyerList.size();i++) {
+			if(buyerName.equalsIgnoreCase(buyerList.get(i).getBuyerName())) {
+				return buyerList.get(i);
+			}
+		}
+		return null;
 	}
 	
 }

@@ -29,7 +29,7 @@ span[contenteditable] { display: inline-block; }
 
 /* heading */
 
-h1 { font: bold 100% sans-serif; letter-spacing: 0.5em; text-align: center; text-transform: uppercase; }
+h1 { font: bold 150% sans-serif; text-align: center; text-transform: uppercase; }
 h3 { font-size: 75%}
 /* table */
 
@@ -51,7 +51,6 @@ body { background: #FFF; border-radius: 1px; box-shadow: 0 0 1in -0.25in rgba(0,
 /* header */
 
 header { margin: 0 0 3em; }
-header:after { clear: both; content: ""; display: table; }
 
 header h1 { background: lightgrey;border-color:black;color: black; margin: 0 0 1em; padding: 0.5em 0;}
 header address { float: left;background: #E0E0E0; font-size: 75%; font-style: normal; line-height: 1.25; margin: 0 1em 1em 0; }
@@ -62,6 +61,7 @@ header img { max-height: 100%; max-width: 100%; }
 header input { cursor: pointer; -ms-filter:"progid:DXImageTransform.Microsoft.Alpha(Opacity=0)"; height: 100%; left: 0; opacity: 0; position: absolute; top: 0; width: 100%; }
 
 select {
+	 /*Arrow button removal in select drop down boxes*/
      /*for firefox*/
      -moz-appearance: none;
      /*for chrome*/
@@ -81,8 +81,8 @@ h2{
 }
 /* article */
 
-article, article address, table.meta, table.inventory { margin: 0 0 3em; }
 article:after { clear: both; content: ""; display: table; }
+article, article address, table.meta, table.inventory { margin: 0 0 3em; }
 article h1 { clip: rect(0 0 0 0); position: absolute; }
 
 article address { float: left; font-size: 125%; font-weight: bold; }
@@ -90,6 +90,7 @@ article address { float: left; font-size: 125%; font-weight: bold; }
 /* table meta & balance */
 
 table.meta{ float: right; width: 40%; }
+table.buyer{float:left; width:30%;}
 table.balance { float: right; width: 30%; }
 table.meta:after, table.balance:after { clear: both; content: ""; display: table; }
 table.contactDetails{ float: right; width: 40%; }
@@ -98,6 +99,10 @@ table.bank{ float: left; width: 40%; }
 
 table.meta th { width: 40%; }
 table.meta td { width: 60%; }
+
+/*table buyer*/
+table.buyer th { width: 40%; }
+table.buyer td { width: 60%; }
 
 /* table contactDetails */
 table.contactDetails th { width: 40%; }

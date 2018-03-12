@@ -91,10 +91,10 @@ function inwordsTrigger(){
 	document.getElementById("idWordsTable").innerHTML=words;
 }
 
-//This script is for filling For G.R Textiles at the end
-function fillfor(){
-	var companyName= 'For '+document.getElementById("companyName").innerHTML;
-	document.getElementById("forPart").innerHTML=companyName;
+//This script is for filling G.R Textiles at the end
+function fillFor(){
+	var forText = 'For G.R Textiles';
+	document.getElementById("forPart").innerHTML=forText;
 }
 
 //This script loads the date in class meta table
@@ -126,6 +126,7 @@ function populate(genereatedClassName){
     	}
     });
 }
+
 //counterForClassname is to give the class of the select to be different all the time so that it can be easily populated without populating the previous row
 var counterForClassname=1;
 function generateTableRow() {
@@ -133,8 +134,8 @@ function generateTableRow() {
 	var genereatedClassName='sel'+counterForClassname;
 	var paramForemptyColumnDOTinnerHTML='<td><a class="cut">-</a><select class="'+genereatedClassName+'"><option>Select a Product </option></select></td>' +
 										'<td><span contenteditable>-</span></td>' +
-										'<td><span>₹</span><span contenteditable onkeypress=\'validate(event)\'></span></td>' +
-										'<td><span contenteditable onkeypress=\'validate(event)\'></span></td>' +
+										'<td><span></span><span contenteditable onkeypress=\'validate(event)\'></span></td>' +
+										'<td>₹<span contenteditable onkeypress=\'validate(event)\'></span></td>' +
 										'<td><span data-prefix>₹</span><span></span></td>';
 	emptyColumn.innerHTML = paramForemptyColumnDOTinnerHTML;
 	populate(genereatedClassName);
