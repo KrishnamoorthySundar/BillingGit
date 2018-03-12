@@ -211,8 +211,14 @@ function updateInvoice() {
 	//set CGST as 2.5% of total
 	cells[2].innerHTML = total*0.025;
 	
+	//calculation of rounded value
+	var roundedVal = Math.round(total + total*0.05);
+		
+	//set roundOff
+	cells[3].innerHTML = roundedVal-(total + total*0.05);
+	
 	//set Bill Amount
-	cells[3].innerHTML = Math.round(total + total*0.05);
+	cells[4].innerHTML = roundedVal;
 	
 	//call trigger
 	inwordsTrigger();
