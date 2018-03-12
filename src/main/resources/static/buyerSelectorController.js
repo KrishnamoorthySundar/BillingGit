@@ -8,3 +8,24 @@ $(document).ready(function() {
     	}
     });
 });
+
+function buyerDetailsloader(){
+	var buyerName = document.getElementById('selectedBuyer').value;
+	subLoader1(buyerName);
+}
+
+function subLoader1(buyerName){
+	var urll="http://localhost:8080/getOneBuyer?buyerName="+buyerName;
+	$.ajax({
+        url: urll
+    }).then(function(data) {
+    	if(data!=null){
+    		$('.standdstct').empty();
+    		$('.stateandcode').empty();
+    		$('.mob').empty();
+    		$('.standdstct').append(data.buyerStreet+","+data.buyerDistrict);
+    		$('.stateandcode').append(data.buyerState+",Code: "+data.buyerCode);
+    		$('.mob').append(data.buyerMobile);
+    	}
+    });
+}
