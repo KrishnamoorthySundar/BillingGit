@@ -1,3 +1,4 @@
+//Populating products in drop down of the first generated row
 $(document).ready(function() {
     $.ajax({
         url: "http://localhost:8080/products"
