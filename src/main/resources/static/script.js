@@ -132,7 +132,8 @@ var counterForClassname=1;
 function generateTableRow() {
 	var emptyColumn = document.createElement('tr');
 	var genereatedClassName='sel'+counterForClassname;
-	var paramForemptyColumnDOTinnerHTML='<td><a class="cut">-</a><select class="'+genereatedClassName+'"><option>Select a Product </option></select></td>' +
+	var paramForemptyColumnDOTinnerHTML='<td><a class="cut">-</a><span contenteditable></span></td>' +
+										'<td><select class="'+genereatedClassName+'"><option>Select a Product </option></select></td>'+
 										'<td><span contenteditable>-</span></td>' +
 										'<td><span></span><span contenteditable onkeypress=\'validate(event)\'></span></td>' +
 										'<td>₹<span contenteditable onkeypress=\'validate(event)\'></span></td>' +
@@ -149,6 +150,19 @@ function parseFloatHTML(element) {
 
 function parsePrice(number) {
 	return number.toFixed(2).replace(/(\d)(?=(\d\d\d)+([^\d]|$))/g, '$1,');
+}
+
+//this is for counterTable updating on row added
+var counterForSno=1;
+function updatecounterTableOnAdd(){
+	counterForSno = counterForSno + 1;
+	document.getElementById('productCount').innerHTML=counterForSno;
+}
+
+//this is for counterTable updating on row removed
+function updatecounterTableOnCut(){
+	counterForSno = counterForSno - 1;
+	document.getElementById('productCount').innerHTML=counterForSno;
 }
 
 /* Update Number
@@ -178,23 +192,28 @@ function updateNumber(e) {
 function updateInvoice() {
 	var total = 0;
 	var cells, price, total, a, i;
-
+	var totalPieces=0;
 	// update inventory cells
 	// ======================
-
 	for (var a = document.querySelectorAll('table.inventory tbody tr'), i = 0; a[i]; ++i) {
 		// get inventory row cells
 		cells = a[i].querySelectorAll('span:last-child');
 
 		// set price as cell[2] * cell[3]
-		price = parseFloatHTML(cells[1]) * parseFloatHTML(cells[2]);
-
+		price = parseFloatHTML(cells[2]) * parseFloatHTML(cells[3]);
+		
+		// Update SNo whenever required
+		(cells[0].innerHTML)=i+1;
+		
 		// add price to total
 		total += price;
-
+		// set total pieces quantity
+		totalPieces = totalPieces + parseFloatHTML(cells[2]);
+		
 		// set row total
-		cells[3].innerHTML = price;
+		cells[4].innerHTML = price;
 	}
+	document.getElementById('totalPieces').innerHTML=totalPieces;
 
 	// update balance cells
 	// ====================
@@ -215,7 +234,13 @@ function updateInvoice() {
 	var roundedVal = Math.round(total + total*0.05);
 		
 	//set roundOff
-	cells[3].innerHTML = roundedVal-(total + total*0.05);
+	//if is for checking and adding + symbol in front
+	if((roundedVal-(total + total*0.05))>0){
+		//toFixed is to limit digits after decimal places
+		cells[3].innerHTML = "(+) "+(roundedVal-(total + total*0.05)).toFixed(2);
+	}else{
+		cells[3].innerHTML = "(-) "+((roundedVal-(total + total*0.05)).toFixed(2))*(-1);
+	}
 	
 	//set Bill Amount
 	cells[4].innerHTML = roundedVal;
@@ -254,11 +279,14 @@ function onContentLoad() {
 
 		if (e.target.matchesSelector('.add')) {
 			document.querySelector('table.inventory tbody').appendChild(generateTableRow());
+			updatecounterTableOnAdd();
 		}
 		else if (e.target.className == 'cut') {
 			row = e.target.ancestorQuerySelector('tr');
 
 			row.parentNode.removeChild(row);
+			updatecounterTableOnCut();
+			
 		}
 		
 		updateInvoice();

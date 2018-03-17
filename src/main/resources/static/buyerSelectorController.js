@@ -23,9 +23,11 @@ function subLoader1(buyerName){
     		$('.standdstct').empty();
     		$('.stateandcode').empty();
     		$('.mob').empty();
+    		$('.gst').empty();
     		$('.standdstct').append(data.buyerStreet+","+data.buyerDistrict);
     		$('.stateandcode').append(data.buyerState+",Code: "+data.buyerCode);
     		$('.mob').append(data.buyerMobile);
+    		$('.gst').append(data.buyerGst);
     	}
     });
 }

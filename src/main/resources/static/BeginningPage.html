@@ -21,19 +21,22 @@
 		</header>
 			<table class="buyer">
 				<tr>
-					<td><span contenteditable style="font-weight: bold;font-size: 16px">TO:</span></td>
+					<td><span contenteditable style="font-size: 12px">TO:</span></td>
 				</tr>
 				<tr>
-					<td><span><select class="buyerSel" onchange="buyerDetailsloader()" id="selectedBuyer"><option>Select a Buyer</option></select></span></td>
+					<td><span><select class="buyerSel" onchange="buyerDetailsloader()" id="selectedBuyer" style="font-weight: bold;"><option>Select a Buyer</option></select></span></td>
 				</tr>
 				<tr>
-					<td><span contenteditable class="standdstct">---</span></td>
+					<td><span class="standdstct">---</span></td>
 				</tr>
 				<tr>
-					<td><span contenteditable class="stateandcode">---</span></td>
+					<td><span class="stateandcode">---</span></td>
 				</tr>
 				<tr>
-					<td><span contenteditable class="mob"></span></td>
+					<td><span class="mob">---</span></td>
+				</tr>
+				<tr>
+					<td><span>GSTIN: </span><span class="gst" style="font-weight: bold;">---</span></td>
 				</tr>
 			</table>
 			<table class="meta">
@@ -62,16 +65,18 @@
 			<table class="inventory">
 				<thead>
 					<tr>
-						<th><span>Item</span></th>
+						<th width="30px"><span>SNo</span></th>
+						<th width="270px"><span>Item</span></th>
 						<th><span>Description</span></th>
-						<th><span>Quantity</span></th>
-						<th><span>Rate</span></th>
+						<th width="55px"><span>Quantity</span></th>
+						<th width="55px"><span>Rate</span></th>
 						<th><span>Price</span></th>
 					</tr>
 				</thead>
 				<tbody>
 					<tr>
-						<td><a class="cut">-</a><select class="sel"><option>Select a Product </option></select></td>
+						<td><a class="cut">-</a><span></span></td>
+						<td><select class="sel"><option>Select a Product </option></select></td>
 						<td><span contenteditable>-</span></td>
 						<td><span contenteditable onkeypress='validate(event)'></span></td>
 						<td><span>₹</span><span contenteditable onkeypress='validate(event)'></span></td>
@@ -80,25 +85,15 @@
 				</tbody>
 			</table>
 			<a class="add">+</a>
-			<h3> Company's BANK details</h3>
-			<table class="bank">
+			<table class="countTable">
 			<tr>
-				<th><span contenteditable>Bank Name</span></th>
-				<td><span contenteditable>Indian Bank</span></td>
+				<th><span>Product Count</span></th>
+				<td><span contenteditable id="productCount">1</span></td>
 			</tr>
 			<tr>
-				<th><span contenteditable>Account No</span></th>
-				<td><span contenteditable>776861626</span></td>
+				<th><span>Total Pieces</span></th>
+				<td><span contenteditable id="totalPieces">0</span></td>
 			</tr>
-			<tr>
-				<th><span contenteditable>Branch</span></th>
-				<td><span contenteditable>Chitlapakkam</span></td>
-			</tr>
-			<tr>
-				<th><span contenteditable>IFSC Code</span></th>
-				<td><span contenteditable>IDIB000C115</span></td>
-			</tr>
-			<tr></tr>
 			</table>
 			<table class="balance">
 				<tr>

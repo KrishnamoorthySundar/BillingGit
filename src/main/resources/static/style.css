@@ -50,7 +50,7 @@ body { background: #FFF; border-radius: 1px; box-shadow: 0 0 1in -0.25in rgba(0,
 
 /* header */
 
-header { margin: 0 0 3em; }
+header { margin: 0 0 0em; }
 
 header h1 { background: lightgrey;border-color:black;color: black; margin: 0 0 1em; padding: 0.5em 0;}
 header address { float: left;background: #E0E0E0; font-size: 75%; font-style: normal; line-height: 1.25; margin: 0 1em 1em 0; }
@@ -76,8 +76,8 @@ button{
 
 h2{
 	position:absolute;
-    bottom: 15%;
-    right:10%;
+    bottom: 12%;
+    right:7%;
 }
 /* article */
 
@@ -94,23 +94,23 @@ table.buyer{float:left; width:30%;}
 table.balance { float: right; width: 30%; }
 table.meta:after, table.balance:after { clear: both; content: ""; display: table; }
 table.contactDetails{ float: right; width: 40%; }
-table.bank{ float: left; width: 40%; }
+table.countTable{ float: left; width: 25%; }
 /* table meta */
 
 table.meta th { width: 40%; }
 table.meta td { width: 60%; }
 
 /*table buyer*/
-table.buyer th { width: 40%; }
-table.buyer td { width: 60%; }
+table.buyer th { width: 40%; border: none;}
+table.buyer td { width: 60%; border: none;}
 
 /* table contactDetails */
 table.contactDetails th { width: 40%; }
 table.contactDetails td { width: 60%; }
 
-/* table bank */
-table.bank th { width: 40%; }
-table.bank td { width: 60%; }
+/* table countTable */
+table.countTable th { width: 40%; }
+table.countTable td { width: 20%; }
 
 /* table items */
 
@@ -122,6 +122,7 @@ table.inventory td:nth-child(2) { width: 38%; }
 table.inventory td:nth-child(3) { text-align: right; width: 12%; }
 table.inventory td:nth-child(4) { text-align: right; width: 12%; }
 table.inventory td:nth-child(5) { text-align: right; width: 12%; }
+table.inventory td:nth-child(6) { text-align: right; width: 12%; }
 
 /* table balance */
 
