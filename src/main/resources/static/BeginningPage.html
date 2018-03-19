@@ -19,6 +19,7 @@
 		<header>			
 			<h1 id="companyName"><p style="letter-spacing: 0.3em, ">G.R. Textiles<br><p style="font-size: 10px">No.1, Ragavan Street, 2nd floor, Shiva Shankar Nagar, Nagalkeni, Chrompet, Chennai-600 044<p style="text-transform: lowercase; font-size: 10px">email: grtextiles.chennai@gmail.com</p></h1>
 		</header>
+		<p align="center" style="font-weight: bold;">GST INVOICE</p>
 			<table class="buyer">
 				<tr>
 					<td><span contenteditable style="font-size: 12px">TO:</span></td>
@@ -41,35 +42,44 @@
 			</table>
 			<table class="meta">
 				<tr>
-					<th><span>Invoice #</span></th>
-					<td><span contenteditable></span></td>
+					<th><span>Invoice No.</span></th>
+					<td><span contenteditable id="invoice"></span></td>
 				</tr>
 				<tr>
+					<!-- padding top is for bring "Date" in the vertical middle of the box -->
 					<th><span>Date</span></th>
-					<!-- Today's date gets automatically populated because of the dateLoader funcation that gets triggered on HTML body loading -->
-					<td><span><input id="theDate" type="date"></span></td>
+					<!-- Today's date gets automatically populated because of the dateLoader function that gets triggered on HTML body loading -->
+					<td style="padding: 0px"><input id="theDate" type="date"></td>
+				</tr>
+				<tr>
+					<th><span>DC No.</span></th>
+					<td><span contenteditable>---</span></td>
 				</tr>
 				<tr>
 					<th><span contenteditable>Roadways</span></th>
-					<td><span contenteditable>---</span></td>
+					<td><span contenteditable>-</span></td>
 				</tr>
 				<tr>
-					<th><span contenteditable>LR/RR No</span></th>
-					<td><span contenteditable>---</span></td>
+					<th><span contenteditable>LR/RR No.</span></th>
+					<td><span contenteditable>-</span></td>
 				</tr>
 				<tr>
-					<th><span contenteditable>HSN CODE</span></th>
-					<td><span contenteditable>5208 (common for all goods)</span></td>
+					<th><span contenteditable>LR/RR Date</span></th>
+					<td><span contenteditable>-</span></td>
+				</tr>
+				<tr>
+					<th><span contenteditable>E-Way Bill No.</span></th>
+					<td><span contenteditable>-</span></td>
 				</tr>
 			</table>
 			<table class="inventory">
 				<thead>
 					<tr>
 						<th width="30px"><span>SNo</span></th>
-						<th width="270px"><span>Item</span></th>
-						<th><span>Description</span></th>
-						<th width="55px"><span>Quantity</span></th>
-						<th width="55px"><span>Rate</span></th>
+						<th width="150px"><span>Item</span></th>
+						<th><span>Size</span></th>
+						<th><span>Quantity</span></th>
+						<th><span>Rate</span></th>
 						<th><span>Price</span></th>
 					</tr>
 				</thead>
@@ -77,24 +87,14 @@
 					<tr>
 						<td><a class="cut">-</a><span></span></td>
 						<td><select class="sel"><option>Select a Product </option></select></td>
-						<td><span contenteditable>-</span></td>
+						<td><span contenteditable><select><option>L&XL</option><option>L</option><option>XL</option><option>XXL</option><option>XXXL</option></select></span></td>
 						<td><span contenteditable onkeypress='validate(event)'></span></td>
 						<td><span>₹</span><span contenteditable onkeypress='validate(event)'></span></td>
 						<td><span data-prefix>₹</span><span></span></td>
 					</tr>
 				</tbody>
 			</table>
-			<a class="add">+</a>
-			<table class="countTable">
-			<tr>
-				<th><span>Product Count</span></th>
-				<td><span contenteditable id="productCount">1</span></td>
-			</tr>
-			<tr>
-				<th><span>Total Pieces</span></th>
-				<td><span contenteditable id="totalPieces">0</span></td>
-			</tr>
-			</table>
+			<a class="add">+</a>			
 			<table class="balance">
 				<tr>
 					<th><span>Total Price</span></th>
@@ -117,6 +117,16 @@
 					<td><span data-prefix>₹</span><span id="billAmount"></span></td>
 				</tr>
 			</table>
+			<table class="countTable">
+			<tr>
+				<th><span>Product Count</span></th>
+				<td><span contenteditable id="productCount">1</span></td>
+			</tr>
+			<tr>
+				<th><span>Total Pieces</span></th>
+				<td><span contenteditable id="totalPieces">0</span></td>
+			</tr>
+			</table>
 			<table class="wordsTable">
 				<tr>
 					<td><span id="idWordsTable"></span></td>
@@ -124,6 +134,6 @@
 			</table>
 		</article>
 	</body>
-		<h2 id="forPart"></h2>
-		<button onclick="fillFor();javascript:window.print();">Thank You</button>
+		<h2 class="h2_1" id="forPart"></h2>
+		<button onclick="fillFor();printChanger();javascript:window.print();" id="forButton">Print</button>
 </html>

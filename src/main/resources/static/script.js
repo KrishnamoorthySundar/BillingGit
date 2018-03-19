@@ -97,18 +97,30 @@ function fillFor(){
 	document.getElementById("forPart").innerHTML=forText;
 }
 
-//This script loads the date in class meta table
+//Change "Print" to "Thank you"
+function printChanger(){
+	document.getElementById("forButton").innerHTML='Thank you';
+}
+
+//Propogation of invoice num
+function invoicePropagator() {
+	var inv=document.getElementById('summa').value;
+	localStorage.setItem("storageName",inv);
+}
+//This script loads the date in class meta table	
 	function dateLoader(){
 		var today = moment().format('YYYY-MM-DD');
 		document.getElementById("theDate").value = today;
+		//this is to propogate invoice typed in loginsuccessful page to begginingHTML page
+		document.getElementById("invoice").innerHTML=localStorage.getItem("storageName");
 	}
+	
 
 //This script disables keystrokes other than numbers, backspace, arrows and delete
 function validate(evt) {
 	  var theEvent = evt || window.event;
 	  var key = theEvent.keyCode || theEvent.which;
 	  key = String.fromCharCode( key );
-	  var regex = /[0-9]|\./;
 	  if( !regex.test(key) ) {
 	    theEvent.returnValue = false;
 	    if(theEvent.preventDefault) theEvent.preventDefault();
@@ -134,7 +146,7 @@ function generateTableRow() {
 	var genereatedClassName='sel'+counterForClassname;
 	var paramForemptyColumnDOTinnerHTML='<td><a class="cut">-</a><span contenteditable></span></td>' +
 										'<td><select class="'+genereatedClassName+'"><option>Select a Product </option></select></td>'+
-										'<td><span contenteditable>-</span></td>' +
+										'<td><span contenteditable><select><option>L&XL</option><option>L</option><option>XL</option><option>XXL</option><option>XXXL</option></select></span></td>' +
 										'<td><span></span><span contenteditable onkeypress=\'validate(event)\'></span></td>' +
 										'<td>₹<span contenteditable onkeypress=\'validate(event)\'></span></td>' +
 										'<td><span data-prefix>₹</span><span></span></td>';
@@ -278,10 +290,15 @@ function onContentLoad() {
 		element && e.target != document.documentElement && e.target != document.body && element.focus();
 
 		if (e.target.matchesSelector('.add')) {
-			document.querySelector('table.inventory tbody').appendChild(generateTableRow());
-			updatecounterTableOnAdd();
+			//checking whether there are 8 rows. if yes adding should not be allowed
+			if(counterForSno<8){
+				document.querySelector('table.inventory tbody').appendChild(generateTableRow());
+				updatecounterTableOnAdd();
+			}else{
+				alert('Please dont add more than 8 rows');
+			}
 		}
-		else if (e.target.className == 'cut') {
+		else if (e.target.className == 'cut') {updatecounterTableOnAdd
 			row = e.target.ancestorQuerySelector('tr');
 
 			row.parentNode.removeChild(row);

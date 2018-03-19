@@ -69,13 +69,13 @@ select {
 }
 
 button{
-    position:absolute;
-    bottom: 5%;
-    right:45%;
+    position: fixed;
+    bottom: 1%;
+    right: 45%
 }
 
-h2{
-	position:absolute;
+h2.h2_1{
+	position: fixed;
     bottom: 12%;
     right:7%;
 }
@@ -90,11 +90,11 @@ article address { float: left; font-size: 125%; font-weight: bold; }
 /* table meta & balance */
 
 table.meta{ float: right; width: 40%; }
-table.buyer{float:left; width:30%;}
+table.buyer{float: left; width:30%;}
 table.balance { float: right; width: 30%; }
 table.meta:after, table.balance:after { clear: both; content: ""; display: table; }
 table.contactDetails{ float: right; width: 40%; }
-table.countTable{ float: left; width: 25%; }
+table.countTable{ float: right; width: 25%; }
 /* table meta */
 
 table.meta th { width: 40%; }
@@ -103,6 +103,8 @@ table.meta td { width: 60%; }
 /*table buyer*/
 table.buyer th { width: 40%; border: none;}
 table.buyer td { width: 60%; border: none;}
+
+
 
 /* table contactDetails */
 table.contactDetails th { width: 40%; }
@@ -132,9 +134,9 @@ table.balance th { font-weight: bold; }
 table.balance td { font-weight: bold; }
 
 /* table wordsTable */
-table.wordsTable td { text-align: right; }
-table.wordsTable th { font-weight: bold; }
-table.wordsTable td { font-weight: bold; }
+table.wordsTable td { text-align: right;}
+table.wordsTable th { font-weight: bold;}
+table.wordsTable td { font-weight: bold;}
 
 /* aside */
 
