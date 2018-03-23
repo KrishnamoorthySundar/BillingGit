@@ -93,13 +93,18 @@ function inwordsTrigger(){
 
 //This script is for filling G.R Textiles at the end
 function fillFor(){
-	var forText = 'For G.R Textiles';
-	document.getElementById("forPart").innerHTML=forText;
+	var forText = '<p style="float: right;padding-right: 20px;">For G.R. Textiles</p>';
+	var temrsAndCondition = '<p style="float: left;padding-left: 20px;font-size: small;">Declaration:<br>We decalare that this invoice shows the<br> actual price of the Goods described and<br> that all particulars are true and correct.</p>';
+	var ack='<p style="text-align: center;">Customer\'s Sign</p>';
+	var sign='<br><br><p style="float: right;padding-right: 20px;font-size: small;">Authorised Signatory</p>';
+	var ackDesc='<p style="text-align: center;font-size: small;">(Received Goods in proper condition)</p>';
+	var totalText=forText+temrsAndCondition+ack+sign+ackDesc;
+	document.getElementById("forPart").innerHTML=totalText;
 }
 
 //Change "Print" to "Thank you"
 function printChanger(){
-	document.getElementById("forButton").innerHTML='Thank you';
+	document.getElementById("forButton").innerHTML='This is a Computer generated Invoice';
 }
 
 //Propogation of invoice num
@@ -118,14 +123,17 @@ function invoicePropagator() {
 
 //This script disables keystrokes other than numbers, backspace, arrows and delete
 function validate(evt) {
-	  var theEvent = evt || window.event;
-	  var key = theEvent.keyCode || theEvent.which;
-	  key = String.fromCharCode( key );
-	  if( !regex.test(key) ) {
-	    theEvent.returnValue = false;
-	    if(theEvent.preventDefault) theEvent.preventDefault();
-	  }
+	var key = window.event ? event.keyCode : event.which;
+
+	if (event.keyCode == 8 || event.keyCode == 46
+	 || event.keyCode == 37 || event.keyCode == 39) {
+	    return true;
 	}
+	else if ( key < 48 || key > 57 ) {
+	    return false;
+	}
+	else return true;
+}
 
 //Populating products in drop down of new row
 function populate(genereatedClassName){
@@ -146,9 +154,9 @@ function generateTableRow() {
 	var genereatedClassName='sel'+counterForClassname;
 	var paramForemptyColumnDOTinnerHTML='<td><a class="cut">-</a><span contenteditable></span></td>' +
 										'<td><select class="'+genereatedClassName+'"><option>Select a Product </option></select></td>'+
-										'<td><span contenteditable><select><option>L&XL</option><option>L</option><option>XL</option><option>XXL</option><option>XXXL</option></select></span></td>' +
-										'<td><span></span><span contenteditable onkeypress=\'validate(event)\'></span></td>' +
-										'<td>₹<span contenteditable onkeypress=\'validate(event)\'></span></td>' +
+										'<td><span contenteditable><select><option>Select a size</option><option>L&XL</option><option>L</option><option>XL</option><option>XXL</option><option>XXXL</option></select></span></td>' +
+										'<td><span></span><span contenteditable onkeypress=\'return validate(event)\'></span></td>' +
+										'<td>₹<span contenteditable onkeypress=\'return validate(event)\'></span></td>' +
 										'<td><span data-prefix>₹</span><span></span></td>';
 	emptyColumn.innerHTML = paramForemptyColumnDOTinnerHTML;
 	populate(genereatedClassName);

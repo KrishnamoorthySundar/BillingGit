@@ -21,10 +21,12 @@ function subLoader1(buyerName){
     }).then(function(data) {
     	if(data!=null){
     		$('.standdstct').empty();
+    		$('.bArea').empty();
     		$('.stateandcode').empty();
     		$('.mob').empty();
     		$('.gst').empty();
-    		$('.standdstct').append(data.buyerStreet+","+data.buyerDistrict);
+    		$('.standdstct').append(data.buyerDistrict);
+    		$('.bArea').append(data.buyerStreet+","+data.buyerArea);
     		$('.stateandcode').append(data.buyerState+",Code: "+data.buyerCode);
     		$('.mob').append(data.buyerMobile);
     		$('.gst').append(data.buyerGst);

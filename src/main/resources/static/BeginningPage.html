@@ -9,9 +9,33 @@
 		<link rel="license" href="https://www.opensource.org/licenses/mit-license/">		
 		<script src="jquery.min.js"></script>
 		<script src="moment.min.js"></script>
+		<script src="jspdf.min.js"></script>
 		<script src="script.js"></script>
 		<script src="selectorController.js"></script>
 		<script src="buyerSelectorController.js"></script>
+		<script>
+		function onSave() {
+			  var pdf = new jsPDF('p', 'pt', 'letter');
+			  pdf.canvas.height = 100 * 100;
+			  pdf.canvas.width =100 * 100;
+
+			  pdf.fromHTML(document.body);
+			  var saveName = document.getElementById('selectedBuyer').value+'-'+document.getElementById("invoice").innerHTML;
+			  pdf.save(saveName+'.pdf');
+			};
+		</script>
+		<script type="text/javascript">
+		function onSave2() {
+			var saveName = document.getElementById('selectedBuyer').value+'-'+document.getElementById("invoice").innerHTML;
+	        var pdf = new jsPDF('p', 'pt', 'letter');
+	        var options = {
+	            background: '#fff' //background is transparent if you don't set it, which turns it black for some reason.
+	        };
+	        pdf.addHTML($('#content')[0], options, function () {
+	                pdf.save(saveName+'.pdf');
+	        });
+	    }
+		</script>
 	
 	</head>
 	<body onload="dateLoader()">
@@ -26,6 +50,9 @@
 				</tr>
 				<tr>
 					<td><span><select class="buyerSel" onchange="buyerDetailsloader()" id="selectedBuyer" style="font-weight: bold;"><option>Select a Buyer</option></select></span></td>
+				</tr>
+				<tr>
+					<td><span class="bArea">---</span></td>
 				</tr>
 				<tr>
 					<td><span class="standdstct">---</span></td>
@@ -87,9 +114,9 @@
 					<tr>
 						<td><a class="cut">-</a><span></span></td>
 						<td><select class="sel"><option>Select a Product </option></select></td>
-						<td><span contenteditable><select><option>L&XL</option><option>L</option><option>XL</option><option>XXL</option><option>XXXL</option></select></span></td>
-						<td><span contenteditable onkeypress='validate(event)'></span></td>
-						<td><span>₹</span><span contenteditable onkeypress='validate(event)'></span></td>
+						<td><span contenteditable><select><option>Select a size</option><option>L&XL</option><option>L</option><option>XL</option><option>XXL</option><option>XXXL</option></select></span></td>
+						<td><span contenteditable onkeypress='return validate(event)'></span></td>
+						<td><span>₹</span><span contenteditable onkeypress='return validate(event)'></span></td>
 						<td><span data-prefix>₹</span><span></span></td>
 					</tr>
 				</tbody>
@@ -127,6 +154,14 @@
 				<td><span contenteditable id="totalPieces">0</span></td>
 			</tr>
 			</table>
+			<div class="bankDetails" style="font-size: small;">
+			<br><br><br><br><br><br>
+			<p>Company's bank Details:</p>
+			<p>Bank Name : INDIAN BANK</p>
+			<p>A/C No. : 776861626</p>
+			<p>Branch : Chitlapakkam</p>
+			<p>IFSC : IDIB000C115</p>
+			</div>
 			<table class="wordsTable">
 				<tr>
 					<td><span id="idWordsTable"></span></td>
@@ -134,6 +169,13 @@
 			</table>
 		</article>
 	</body>
-		<h2 class="h2_1" id="forPart"></h2>
-		<button onclick="fillFor();printChanger();javascript:window.print();" id="forButton">Print</button>
+		<!-- <h2 class="h2_1" id="forPart"></h2> -->
+		<div class="footer" id="forPart">
+		</div>
+		<!-- <button onclick="fillFor();printChanger();onSave();javascript:window.print();" id="forButton">Print</button> -->
+		<!-- <button onclick="printChanger();javascript:window.print();" id="forButton">Print</button> -->
+		<!-- <div data-html2canvas-ignore="true">
+   			 <button id="pdf-new"><a href="javascript:demoFromHTML()" class="button" style="color: black;">Generate PDF</a></button>
+		</div> -->
+		<button onclick="fillFor();printChanger();onSave2();javascript:window.print();" id="forButton">Print</button>
 </html>

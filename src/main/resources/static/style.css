@@ -1,5 +1,13 @@
+.footer {
+   position: fixed;
+   left: 0;
+   bottom: 0;
+   height: 11%;
+   width: 100%;
+   background-color: none ;
+   color: none;
+}
 /* reset */
-
 *
 {
 	border: 0;
@@ -70,15 +78,16 @@ select {
 
 button{
     position: fixed;
-    bottom: 1%;
+    bottom: 5%;
     right: 45%
 }
 
-h2.h2_1{
+/* h2.h2_1{
 	position: fixed;
-    bottom: 12%;
+    bottom: 15%;
     right:7%;
-}
+} */
+
 /* article */
 
 article:after { clear: both; content: ""; display: table; }
@@ -95,6 +104,7 @@ table.balance { float: right; width: 30%; }
 table.meta:after, table.balance:after { clear: both; content: ""; display: table; }
 table.contactDetails{ float: right; width: 40%; }
 table.countTable{ float: right; width: 25%; }
+div.bankDetails{ float: left; width: 25%; }
 /* table meta */
 
 table.meta th { width: 40%; }
@@ -121,7 +131,7 @@ table.inventory th { font-weight: bold; text-align: center; }
 
 table.inventory td:nth-child(1) { width: 26%; }
 table.inventory td:nth-child(2) { width: 38%; }
-table.inventory td:nth-child(3) { text-align: right; width: 12%; }
+table.inventory td:nth-child(3) { text-align: left; width: 12%; }
 table.inventory td:nth-child(4) { text-align: right; width: 12%; }
 table.inventory td:nth-child(5) { text-align: right; width: 12%; }
 table.inventory td:nth-child(6) { text-align: right; width: 12%; }
